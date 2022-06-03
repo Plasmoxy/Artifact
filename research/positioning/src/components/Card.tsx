@@ -1,29 +1,38 @@
-import { PropsWithChildren } from "react"
+import { CSSProperties, PropsWithChildren } from "react"
 import { Pos } from "../types"
 
-type Props = {
-  pos: Pos
+type Props = Pos & {
+  w?: number
+  h?: number
+  style?: CSSProperties
+  rgb?: string
 }
 
-const Card = (props: PropsWithChildren<Props>) => {
+const Card = (p: PropsWithChildren<Props>) => {
+  const color = p.rgb ?? "0, 200, 220"
+
   return (
     <div
       style={{
         position: "relative",
-        top: props.pos.y,
-        left: props.pos.x,
-        background: "white",
-        color: "black",
+        top: p.y,
+        left: p.x,
+        background: `rgba(${color}, 0.05)`,
+        color: `rgb(${color})`,
         borderRadius: 16,
         display: "inline-block",
-        height: 100,
-        width: 100,
+        height: p.w ?? 100,
+        width: p.h ?? 100,
         padding: 16,
-        userSelect: "none",
         cursor: "default",
+        border: `solid 1px rgb(${color})`,
+        boxShadow: `rgba(${color}, 0.1) 0px 8px 24px`,
+        fontFamily: "'Quicksand', sans-serif",
+        overflowY: "auto",
+        ...(p.style ?? {}),
       }}
     >
-      {props.children}
+      {p.children}
     </div>
   )
 }

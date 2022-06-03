@@ -3,6 +3,7 @@ html {
   background: #111113;
   color: white;
   overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 #root {
